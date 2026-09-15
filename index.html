@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Interactive Birthday Book — Món quà sinh nhật đặc biệt dạng sách điện tử 3D lật trang.">
+    <meta name="theme-color" content="#460f1b">
+    <title>Happy Birthday! 🎂 A Special Gift For You</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- canvas-confetti CDN for celebration effect -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <!-- Background Canvas for Floating Particles & Glow -->
+    <canvas id="particles-canvas" class="particles-bg" aria-hidden="true"></canvas>
+
+    <!-- Floating Top Bar / Controls -->
+    <header class="top-nav" aria-label="Điều khiển trang">
+        <div class="top-nav-brand">
+            <span class="brand-sparkle" aria-hidden="true">✨</span>
+            <span class="brand-text" id="top-title">Birthday Surprise</span>
+        </div>
+        <div class="top-nav-actions">
+            <!-- Music Toggle Button -->
+            <button id="music-toggle-btn" class="icon-btn" aria-label="Bật/tắt nhạc nền" title="Bật/tắt âm nhạc">
+                <span class="music-icon" id="music-icon">🔇</span>
+                <span class="music-wave" aria-hidden="true">
+                    <span></span><span></span><span></span>
+                </span>
+            </button>
+            <!-- Lock/Reset Session Button -->
+            <button id="lock-toggle-btn" class="icon-btn" aria-label="Khóa lại màn hình" title="Khóa thiệp">
+                <span aria-hidden="true">🔒</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN APP WRAPPER -->
+    <main class="app-container">
+
+        <!-- ========================================================= -->
+        <!-- 1. PASSWORD SCREEN (MÀN HÌNH KHÓA)                         -->
+        <!-- ========================================================= -->
+        <section id="lock-screen" class="lock-screen" aria-label="Màn hình nhập mật khẩu">
+            <div class="lock-card">
+                <!-- Gift / Lock Animated Badge -->
+                <div class="lock-badge-wrapper">
+                    <div class="gift-box-glow" aria-hidden="true"></div>
+                    <div class="gift-box" id="lock-gift-icon" aria-hidden="true">🎁</div>
+                </div>
+
+                <span class="badge-pill" id="lock-badge-text">Special Birthday Surprise</span>
+                <h1 class="lock-title" id="lock-title">A little surprise for you</h1>
+                <p class="lock-subtitle" id="lock-subtitle">Nhập mật khẩu để mở món quà sinh nhật đặc biệt này nhé!</p>
+
+                <!-- Password Form -->
+                <form id="lock-form" class="lock-form" novalidate>
+                    <div class="input-group">
+                        <span class="input-icon" aria-hidden="true">🔑</span>
+                        <input 
+                            type="password" 
+                            id="password-input" 
+                            class="password-input" 
+                            placeholder="Nhập mật khẩu bí mật..." 
+                            autocomplete="off"
+                            required
+                            aria-label="Mật khẩu mở thiệp"
+                            aria-describedby="lock-error-msg"
+                        >
+                        <button type="button" id="toggle-pw-visibility" class="toggle-pw-btn" aria-label="Hiện hoặc ẩn mật khẩu">
+                            👁️
+                        </button>
+                    </div>
+
+                    <!-- Error Alert -->
+                    <div id="lock-error-msg" class="lock-error-msg" role="alert" aria-live="polite">
+                        <span class="error-icon" aria-hidden="true">💭</span>
+                        <span id="error-text">Hmm... mật khẩu chưa đúng. Thử lại nhé!</span>
+                    </div>
+
+                    <button type="submit" id="unlock-btn" class="btn btn-primary unlock-btn">
+                        <span class="btn-text" id="unlock-btn-text">Mở quà 🎁</span>
+                        <span class="btn-spinner" aria-hidden="true"></span>
+                    </button>
+                </form>
+
+                <p class="lock-hint" id="lock-hint">
+                    <small>Gợi ý: Mật khẩu mặc định là <code>birthday123</code></small>
+                </p>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- 2. BOOK PRESENTATION SCREEN (QUYỂN SÁCH SINH NHẬT 3D)     -->
+        <!-- ========================================================= -->
+        <section id="book-screen" class="book-screen hidden" aria-label="Quyển sách thiệp sinh nhật">
+            
+            <div class="book-viewport" id="book-viewport">
+                <!-- 3D Book Container -->
+                <div class="book-perspective">
+                    <div class="book-wrapper" id="book-wrapper">
+                        <!-- Book Hard Spine & Base Shadow -->
+                        <div class="book-spine-shadow" aria-hidden="true"></div>
+                        <div class="book-spine-hinge" aria-hidden="true"></div>
+
+                        <!-- DYNAMIC BOOK SHEETS (Injected by app.js) -->
+                        <div class="book-sheets" id="book-sheets">
+                            <!-- Sheets rendered via config.js -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Edge Click Trigger Areas (for easy flipping) -->
+                <button type="button" class="edge-click-area edge-left" id="edge-prev-btn" aria-label="Lật trang trước"></button>
+                <button type="button" class="edge-click-area edge-right" id="edge-next-btn" aria-label="Lật trang sau"></button>
+            </div>
+
+            <!-- BOOK BOTTOM CONTROLS & NAVIGATION -->
+            <nav class="book-controls" aria-label="Điều hướng các trang sách">
+                <button id="prev-btn" class="nav-btn prev-btn" aria-label="Trang trước" title="Trang trước (Phím ←)">
+                    <span class="nav-arrow" aria-hidden="true">‹</span>
+                    <span class="nav-label">Trước</span>
+                </button>
+
+                <div class="page-indicator-container">
+                    <span class="page-indicator" id="page-indicator">Trang 1 / 6</span>
+                    <div class="indicator-dots" id="indicator-dots" aria-hidden="true">
+                        <!-- Dots populated via JS -->
+                    </div>
+                </div>
+
+                <button id="next-btn" class="nav-btn next-btn" aria-label="Trang tiếp theo" title="Trang tiếp theo (Phím →)">
+                    <span class="nav-label">Tiếp</span>
+                    <span class="nav-arrow" aria-hidden="true">›</span>
+                </button>
+            </nav>
+
+            <!-- Quick Action Toast / Floating Celebration Container -->
+            <div id="celebration-particles" class="celebration-particles" aria-hidden="true"></div>
+        </section>
+
+    </main>
+
+    <!-- Hidden audio element (falls back to Web Audio Synthesizer if file not found) -->
+    <audio id="bg-audio" preload="auto" loop></audio>
+
+    <!-- Scripts: Config must load before App -->
+    <script src="js/config.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

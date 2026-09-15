@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: birthday-book
+    runtime: static
+    buildCommand: ""
+    staticPublishPath: .
