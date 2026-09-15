@@ -82,41 +82,79 @@ hpbd/
 
 ## ⚙️ Hướng Dẫn Tùy Biến (Customize The Birthday Card)
 
-Mọi chỉnh sửa đều thực hiện trong file [`js/config.js`](file:///C:/Users/dangh/Desktop/hpbd/js/config.js) mà không cần đụng đến code logic!
+Mọi chỉnh sửa đều thực hiện trong file [`js/config.js`](file:///C:/Users/dangh/Desktop/hpbd/js/config.js) mà không cần đụng đến HTML hay code logic!
+Đặc biệt, trong mọi đoạn text bạn có thể viết `{recipient}` (tự điền tên người nhận) hoặc `{sender}` (tự điền tên người gửi).
 
-### 1. Thay đổi mật khẩu mở thiệp
-Mở [`js/config.js`](file:///C:/Users/dangh/Desktop/hpbd/js/config.js) và tìm dòng:
+### 1. Thay đổi mật khẩu & gợi ý mở thiệp
+Mở [`js/config.js`](file:///C:/Users/dangh/Desktop/hpbd/js/config.js) và chỉnh trong mục `auth`:
 ```javascript
-password: "birthday123", // Thay bằng mật khẩu bí mật của bạn (ví dụ: ngày sinh "15092026")
-rememberUnlock: true,    // true: reload không cần nhập lại trong cùng phiên duyệt web
+auth: {
+    password: "16092003", // Mật khẩu mở thiệp (vd: ngày sinh, nickname, kỷ niệm)
+    rememberUnlock: true  // true: F5 không cần nhập lại trong cùng phiên duyệt web
+}
 ```
 
-### 2. Thay đổi tên người nhận và người gửi
+### 2. Tùy chỉnh thông báo lỗi & gợi ý màn hình khóa
+Trong mục `lockScreen`:
+```javascript
+lockScreen: {
+    badge: "Thiệp online tại viết chữ xấu :>",
+    title: "NgocAnh",
+    subtitle: "Nhập mật khẩu để mở món quà sinh nhật đặc biệt này hé!",
+    inputPlaceholder: "Nhập mật khẩu bí mật...",
+    buttonText: "Mở quà 🎁",
+    errorMessage: "Hmm... mật khẩu chưa đúng 💭 Thử lại hé!", // Tùy chỉnh thông báo sai mật khẩu
+    showHint: false, // true nếu muốn hiện gợi ý bên dưới ô nhập
+    hintText: "Gợi ý: Ngày tháng năm sinh viết liền"
+}
+```
+
+### 3. Thay đổi tên người nhận và người gửi
 ```javascript
 recipient: {
-    name: "Tên người nhận (ví dụ: Lan Anh)",
+    name: "Tên người nhận (ví dụ: Ngọc Ánh)",
     nickname: "Bé Yêu"
 },
 
 sender: {
-    name: "Tên người gửi (ví dụ: Hoàng Đăng)"
+    name: "Tên người gửi (ví dụ: Someone who cares)"
 },
 
 birthday: {
-    title: "Happy Birthday!",
-    subtitle: "Chúc mừng sinh nhật tuổi 20",
-    date: "15/09/2026"
-},
+    date: "16/09/2003",
+    formattedDate: "16 Tháng 09, 2003"
+}
 ```
 
-### 3. Thay đổi hình ảnh kỷ niệm
+### 4. Tùy biến bìa ngoài & trang ngỏ bên trong
+Trong mục `cover`:
+```javascript
+cover: {
+    front: {
+        sealIcon: "🎂",
+        badge: "Đặc biệt dành riêng cho bạn",
+        title: "Happy Birthday",
+        subtitle: "A little book made just for you",
+        instruction: "Nhấn nút 'Mở sách' hoặc lật góc để bắt đầu 📖"
+    },
+    inside: {
+        tag: "Dành tặng bạn",
+        title: "Một món quà nhỏ anh gửi em",
+        message: "Quyển sách nhỏ này được tạo nên từ những tình cảm chân thành nhất...",
+        quote: "“Chúc cho hành trình tuổi mới của {recipient} luôn tràn ngập nụ cười và ánh nắng rực rỡ.”",
+        hint: "Hãy lật sang trang tiếp theo để cùng khám phá nhé! 👉"
+    }
+}
+```
+
+### 5. Thay đổi hình ảnh kỷ niệm
 1. Copy ảnh của bạn vào thư mục `assets/images/`.
 2. Khuyến khích đổi tên thành `photo-1.jpg`, `photo-2.jpg`, `photo-3.jpg`, `photo-4.jpg` (hoặc định dạng `.png`, `.webp`).
 3. Cập nhật đường dẫn trong `config.js`:
 ```javascript
 // Trang 2: Ảnh kỷ niệm lớn
 image: "assets/images/photo-1.jpg",
-caption: "Một kỷ niệm thật đẹp tại Đà Lạt năm ấy.",
+caption: "Một kỷ niệm thật đẹp trên chặng đường chúng ta cùng đi qua.",
 
 // Trang 3: Bộ sưu tập 3 ảnh polaroid
 photos: [
@@ -125,16 +163,17 @@ photos: [
     { image: "assets/images/photo-4.jpg", caption: "Khoảnh khắc đáng yêu 💖" }
 ]
 ```
-> *Lưu ý: Nếu không có ảnh hoặc đường dẫn sai, hệ thống sẽ tự động hiển thị khung Polaroid minh họa tuyệt đẹp.*
+> *Lưu ý: Nếu chưa có ảnh hoặc đường dẫn sai, hệ thống tự động hiển thị khung Polaroid nghệ thuật dự phòng.*
 
-### 4. Thay đổi lời chúc của từng trang
+### 6. Thay đổi lời chúc của từng trang
 Trong mảng `pages: [...]` của `config.js`:
 - **Trang 1 (`type: "opening"`)**: Lời mở đầu, đoạn trích dẫn ý nghĩa.
 - **Trang 2 (`type: "memory"`)**: Ảnh kỷ niệm lớn cùng câu chuyện kèm theo.
 - **Trang 3 (`type: "gallery"`)**: Bộ 3 ảnh dạng scrapbook polaroid dán băng keo washi.
 - **Trang 4 (`type: "wishes"`)**: 4 thẻ điều ước tương ứng với các icon ✨, 🌷, 🎂, 💖.
 - **Trang 5 (`type: "letter"`)**: Lá thư viết tay bằng font chữ mềm mại (`Dancing Script`) kèm con dấu sáp cổ điển.
-- **Trang 6 (`type: "final"`)**: Trang kết chúc mừng sinh nhật, kích hoạt pháo hoa và hoa giấy bay.
+- **Trang 6 (`type: "final"`)**: Trang kết chúc mừng sinh nhật, bánh kem tương tác và pháo hoa rực rỡ.
+- **Mục `closing` & `backCover`**: Trang lời chúc cuối cùng và bìa sau sách.
 
 ### 5. Thêm nhạc nền MP3
 1. Copy file bài hát yêu thích định dạng `.mp3` vào thư mục `assets/audio/`.

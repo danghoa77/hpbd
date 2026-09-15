@@ -57,8 +57,8 @@
                     <div class="gift-box" id="lock-gift-icon" aria-hidden="true">🎁</div>
                 </div>
 
-                <span class="badge-pill" id="lock-badge-text">Special Birthday Surprise</span>
-                <h1 class="lock-title" id="lock-title">A little surprise for you</h1>
+                <span class="badge-pill" id="lock-badge-text">Mừng sinh nhật em</span>
+                <h1 class="lock-title" id="lock-title">NgocAnh</h1>
                 <p class="lock-subtitle" id="lock-subtitle">Nhập mật khẩu để mở món quà sinh nhật đặc biệt này nhé!</p>
 
                 <!-- Password Form -->
@@ -83,7 +83,7 @@
                     <!-- Error Alert -->
                     <div id="lock-error-msg" class="lock-error-msg" role="alert" aria-live="polite">
                         <span class="error-icon" aria-hidden="true">💭</span>
-                        <span id="error-text">Hmm... mật khẩu chưa đúng. Thử lại nhé!</span>
+                        <span id="error-text">Hmm... mật khẩu chưa đúng. Thử lại hé!</span>
                     </div>
 
                     <button type="submit" id="unlock-btn" class="btn btn-primary unlock-btn">
@@ -92,8 +92,9 @@
                     </button>
                 </form>
 
-                <p class="lock-hint" id="lock-hint">
-                    <small>Gợi ý: Mật khẩu mặc định là <code>birthday123</code></small>
+                <!-- Password Hint (Enabled via config.lockScreen.showHint) -->
+                <p class="lock-hint" id="lock-hint" style="display: none;">
+                    <small id="lock-hint-text">Gợi ý: Mật khẩu bí mật</small>
                 </p>
             </div>
         </section>
@@ -127,7 +128,7 @@
             <nav class="book-controls" aria-label="Điều hướng các trang sách">
                 <button id="prev-btn" class="nav-btn prev-btn" aria-label="Trang trước" title="Trang trước (Phím ←)">
                     <span class="nav-arrow" aria-hidden="true">‹</span>
-                    <span class="nav-label">Trước</span>
+                    <span class="nav-label" id="prev-btn-label">Trước</span>
                 </button>
 
                 <div class="page-indicator-container">
@@ -138,7 +139,7 @@
                 </div>
 
                 <button id="next-btn" class="nav-btn next-btn" aria-label="Trang tiếp theo" title="Trang tiếp theo (Phím →)">
-                    <span class="nav-label">Tiếp</span>
+                    <span class="nav-label" id="next-btn-label">Tiếp</span>
                     <span class="nav-arrow" aria-hidden="true">›</span>
                 </button>
             </nav>
@@ -149,8 +150,17 @@
 
     </main>
 
+    <!-- Lightbox Image Preview Modal -->
+    <div id="image-lightbox" class="lightbox-modal" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="lightbox-content">
+            <button type="button" id="lightbox-close-btn" class="lightbox-close" aria-label="Đóng xem ảnh">✕</button>
+            <img id="lightbox-img" class="lightbox-image" src="" alt="Xem ảnh phóng to">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+    </div>
+
     <!-- Hidden audio element (falls back to Web Audio Synthesizer if file not found) -->
-    <audio id="bg-audio" preload="auto" loop></audio>
+    <audio id="bg-audio" preload="auto" loop src="assets/audio/Happy%20Birthday%20(Piano%20Version).mp3"></audio>
 
     <!-- Scripts: Config must load before App -->
     <script src="js/config.js"></script>

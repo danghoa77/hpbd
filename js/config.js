@@ -1,183 +1,247 @@
 /**
  * ====================================================================
- * BIRTHDAY CARD CONFIGURATION
+ * 🎂 TOÀN BỘ CẤU HÌNH THIỆP SINH NHẬT (BIRTHDAY CONFIGURATION)
  * ====================================================================
- * Bạn có thể tự do chỉnh sửa nội dung, mật khẩu, hình ảnh và âm nhạc
- * tại file này mà không cần can thiệp vào logic xử lý của ứng dụng.
+ * Bạn có thể tự do chỉnh sửa tất cả thông tin, tên, mật khẩu, thông báo lỗi,
+ * hình ảnh, lời chúc, bài hát... tại duy nhất file này mà không cần sửa HTML hay JS!
+ *
+ * Mẹo: Trong các đoạn text, bạn có thể dùng:
+ *   {recipient} -> sẽ tự động thay bằng tên người nhận (config.recipient.name)
+ *   {sender}    -> sẽ tự động thay bằng tên người gửi (config.sender.name)
+ * ====================================================================
  */
 
 const birthdayConfig = {
     // ----------------------------------------------------------------
-    // 1. MẬT KHẨU MỞ THIỆP
+    // 1. MẬT KHẨU & BẢO MẬT (PASSWORD & SECURITY)
     // ----------------------------------------------------------------
-    // Mật khẩu để mở sách. Nhập đúng mật khẩu này để mở thiệp.
-    password: "birthday123",
+    auth: {
+        // Mật khẩu để mở thiệp (ví dụ: ngày sinh "16092003" hoặc nickname)
+        password: "16092003",
 
-    // Lưu trạng thái đã mở trong phiên duyệt web (session).
-    // Nếu true: Sau khi nhập đúng 1 lần, F5 reload trang sẽ không phải nhập lại mật khẩu.
-    // Nếu false: Luôn yêu cầu nhập mật khẩu mỗi lần load trang.
-    rememberUnlock: true,
+        // Ghi nhớ trạng thái đã mở trong phiên (sessionStorage):
+        // true: Sau khi nhập đúng 1 lần, F5 tải lại trang sẽ không phải nhập lại.
+        // false: Luôn yêu cầu nhập mật khẩu mỗi lần vào trang.
+        rememberUnlock: true
+    },
 
     // ----------------------------------------------------------------
-    // 2. THÔNG TIN NGƯỜI NHẬN & NGƯỜI GỬI
+    // 2. THÔNG TIN NGƯỜI NHẬN & NGƯỜI GỬI (PEOPLE)
     // ----------------------------------------------------------------
     recipient: {
-        name: "Người đặc biệt",
-        nickname: "Bé Yêu"
+        name: "Ngọc Ánh",          // Tên chính hiển thị trên thiệp
+        nickname: "Yêu"                  // Biệt danh / cách gọi thân mật
     },
 
     sender: {
-        name: "Someone who cares"
+        name: "Someone who cares"        // Tên hoặc danh xưng người gửi thiệp
     },
 
     birthday: {
-        title: "Happy Birthday!",
-        subtitle: "Chúc mừng sinh nhật",
-        date: "15/09/2026"
+        date: "16/09/2003",              // Ngày sinh nhật (dd/mm/yyyy)
+        formattedDate: "16 Tháng 09, 2003"
     },
 
     // ----------------------------------------------------------------
-    // 3. MÀN HÌNH KHÓA (PASSWORD SCREEN)
+    // 3. TIÊU ĐỀ & THANH ĐIỀU HƯỚNG TRÊN CÙNG (HEADER & TOP BAR)
+    // ----------------------------------------------------------------
+    header: {
+        pageTitle: "Happy Birthday! ", // Tiêu đề hiển thị trên tab trình duyệt
+        brandText: "Birthday Surprise",                          // Chữ thương hiệu góc trên bên trái
+        musicTooltip: "Bật / Tắt âm nhạc",
+        lockTooltip: "Khóa lại màn hình"
+    },
+
+    // ----------------------------------------------------------------
+    // 4. MÀN HÌNH KHÓA (LOCK SCREEN)
     // ----------------------------------------------------------------
     lockScreen: {
-        badge: "Special Birthday Surprise",
-        title: "A little surprise for you",
-        subtitle: "Nhập mật khẩu để mở món quà sinh nhật đặc biệt này nhé!",
+        badge: "Chúc mừng sinh nhật em",
+        title: "Gửi Ngọc Ánh",
+        subtitle: "Nhập mật khẩu để mở món quà sinh nhật đặc biệt này hé!",
         inputPlaceholder: "Nhập mật khẩu bí mật...",
         buttonText: "Mở quà 🎁",
-        hintText: "Gợi ý: Mật khẩu mặc định là 'birthday123'",
-        errorMessage: "Hmm... mật khẩu chưa đúng 💭 Thử lại nhé!"
+        // Thông báo khi nhập sai mật khẩu:
+        errorMessage: "Hmm... mật khẩu chưa đúng 💭 Thử lại hé!",
+        // Gợi ý mật khẩu:
+        showHint: false, // Đổi thành true nếu muốn hiện gợi ý bên dưới form
+        hintText: "Gợi ý: Ngày tháng năm sinh viết liền (vd: 16092003)"
     },
 
     // ----------------------------------------------------------------
-    // 4. BÌA SÁCH (BOOK COVER)
+    // 5. BÌA SÁCH (BOOK COVERS)
     // ----------------------------------------------------------------
     cover: {
-        badge: "Đặc biệt dành riêng cho bạn",
-        title: "Happy Birthday",
-        subtitle: "A little book made just for you",
-        instruction: "Nhấn nút 'Mở sách' hoặc lật góc để bắt đầu 📖",
-        openButtonText: "Mở sách ✨"
+        // Mặt ngoài bìa sách (Front Cover)
+        front: {
+            sealIcon: "🌸",
+            badge: "",
+            title: "Happy Birthday",
+            subtitle: "Một lời chúc",
+            instruction: "Nhấn nút 'Mở sách' hoặc lật góc để bắt đầu nè📖",
+            openButtonText: "Mở sách ✨"
+        },
+
+        // Mặt trong bìa sách (Inside Cover - Trang ngỏ mở đầu bên trái)
+        inside: {
+            tag: "Tặng em",
+            title: "Một món quà nhỏ anh gửi em",
+            divider: "✨ 🌸 ✨",
+            message: "Anh cũng đã gửi thiệp tay cho em rồi nhưng nó ngắn và chữ không đẹp lắm nên anh làm cái này",
+            quote: "“Chúc cho hành trình tuổi mới của {recipient} mọi việc luôn suôn sẻ, và nhiều sức khỏe, không có ốm vặt”",
+            hint: "Lật tiếp đi hé! 👉"
+        }
     },
 
     // ----------------------------------------------------------------
-    // 5. NỘI DUNG CÁC TRANG SÁCH (PAGES)
+    // 6. NỘI DUNG CÁC TRANG TRONG SÁCH (BOOK PAGES)
     // ----------------------------------------------------------------
     pages: [
-        // Trang 1: Lời mở đầu
+        // Trang 1: Lời mở đầu (Opening)
         {
             type: "opening",
-            pageNumber: 1,
+            chapter: "Chương I",
             title: "Hôm Nay Là Một Ngày Đặc Biệt",
-            subtitle: "Chào tuổi mới rạng rỡ",
-            content: "Có một ngày trong năm mà cả vũ trụ dường như trở nên ấm áp và lấp lánh hơn, bởi đó chính là ngày bạn xuất hiện trên thế giới này. Cảm ơn sự hiện diện dịu dàng của bạn đã mang đến biết bao niềm vui và những khoảnh khắc tuyệt vời cho những người xung quanh.",
-            quote: "“Mong rằng mỗi ngày thức dậy, bạn đều tìm thấy một lý do thật ngọt ngào để mỉm cười.”",
-            decor: "🌸"
+            subtitle: "Tuổi mới rạng rỡ",
+            decor: "🌸",
+            content: "Hôm nay em đi chơi có vui không, hẳn là vui he, có được nhận quà của mấy đứa kia không á, linh thì chắc tặng váy rồi còn mấy nhỏ kia anh không biết, đi ăn xong có hát hò không đó :>",
+            quote: "“Mong rằng ngày mai thức dậy, muộn phiền từ tuổi cũ của em sẽ qua hết hehe”"
         },
 
-        // Trang 2: Kỷ niệm đáng nhớ (Ảnh đơn lớn)
+        // Trang 2: Kỷ niệm đáng nhớ (Memory - Ảnh lớn)
         {
             type: "memory",
-            pageNumber: 2,
-            title: "Những Khoảnh Khắc Đẹp",
-            subtitle: "Lưu giữ kỷ niệm",
+            chapter: "Chương II",
+            title: "Xinh gái chụp ảnh",
+            subtitle: "Ảnh đẹp he",
+            decor: "📷",
             image: "assets/images/photo-1.jpg",
-            caption: "Một kỷ niệm thật đẹp trên chặng đường chúng ta cùng đi qua. Mỗi bức ảnh là một thước phim vô giá.",
-            date: "Kỷ niệm đáng nhớ",
-            decor: "📷"
+            dateTag: "✨ Kỷ niệm đáng nhớ",
+            caption: "Mới đó mà nhanh quá ha, cứ như hôm qua thôi :>."
         },
 
-        // Trang 3: Bộ sưu tập ảnh (Gallery / Polaroid Scrapbook)
+        // Trang 3: Bộ sưu tập ảnh (Gallery Polaroid)
         {
-            type: "gallery",
-            pageNumber: 3,
-            title: "Góc Kỷ Niệm Yêu Thương",
+            type: "photos",
+            chapter: "Chương III",
+            title: "Tiên nữ cũng chỉ đến thế",
             subtitle: "Những nụ cười đong đầy niềm vui",
+            decor: "✨",
             photos: [
                 {
                     image: "assets/images/photo-2.jpg",
-                    caption: "Nụ cười tỏa nắng ✨"
+                    caption: "Tươi chưa kìa"
                 },
                 {
                     image: "assets/images/photo-3.jpg",
-                    caption: "Bình yên dịu dàng 🌷"
-                },
+                    caption: "Dịu keo hẹ hẹ 🌷"
+                }
+            ],
+            quote: "“Cười xinh thế cơ mà.”"
+        },
+
+        // Trang 4: Mục ảnh kỷ niệm (Photo Section 2)
+        {
+            type: "photos",
+            chapter: "Chương IV",
+            title: "Ngọt quá, Tan chảy mất",
+            subtitle: "Từng nụ cười đong đầy niềm vui",
+            decor: "💖",
+            photos: [
                 {
                     image: "assets/images/photo-4.jpg",
-                    caption: "Khoảnh khắc đáng yêu 💖"
+                    caption: "Quá đẹpp 💖"
+                },
+                {
+                    image: "assets/images/photo-7.jpg",
+                    caption: "Xinh quó ✨"
                 }
-            ]
+            ],
+            quote: "“Nhớ ghê he 💖 .”"
         },
 
-        // Trang 4: Những lời chúc ý nghĩa (Wishes Cards)
+        // Trang 5: Mục ảnh yêu thương (Photo Section 3)
         {
-            type: "wishes",
-            pageNumber: 4,
-            title: "Những Điều Ước Cho Tuổi Mới",
-            subtitle: "Gửi trọn những yêu thương chân thành nhất",
-            cards: [
+            type: "photos",
+            chapter: "Chương V",
+            title: "Mỹ Nữ",
+            subtitle: "Lưu giữ những điều tuyệt vời nhất",
+            decor: "🌸",
+            photos: [
                 {
-                    icon: "✨",
-                    title: "Bình An & Rạng Rỡ",
-                    text: "Mong bạn luôn giữ được sự an nhiên trong tâm hồn và nụ cười tươi tắn như ánh mai sớm."
+                    image: "assets/images/photo-6.jpg",
+                    caption: "Chói quá 🌸"
                 },
                 {
-                    icon: "🌷",
-                    title: "Vạn Sự Như Ý",
-                    text: "Mong mọi ước mơ, dự định bạn ấp ủ sẽ đều đơm hoa kết trái thật ngọt ngào và rực rỡ."
-                },
-                {
-                    icon: "🎂",
-                    title: "Ngập Tràn Niềm Vui",
-                    text: "Chúc bạn một tuổi mới nhiều sức khỏe, luôn may mắn và gặp gỡ những điều tuyệt vời."
-                },
-                {
-                    icon: "💖",
-                    title: "Mãi Được Yêu Thương",
-                    text: "Hy vọng mỗi ngày trôi qua, bạn luôn được chở che, thấu hiểu và yêu thương trọn vẹn."
+                    image: "assets/images/photo-5.jpg",
+                    caption: "Sweet 🎂"
                 }
-            ]
+            ],
+            quote: "“Chúc em tuổi mới luôn là đóa hoa xinh đẹp và hạnh phúc nhất.”"
         },
 
-        // Trang 5: Lá thư tay tâm tình (Personal Handwritten Letter)
-        {
-            type: "letter",
-            pageNumber: 5,
-            title: "Lá Thư Gửi Bạn",
-            date: "15 Tháng 09",
-            greeting: "Gửi người tôi luôn trân quý,",
-            content: "Cảm ơn bạn vì đã luôn là một người bạn, một người đồng hành thật tuyệt vời. Có những ngày mỏi mệt, chỉ cần một nụ cười hay câu chuyện vui từ bạn cũng đủ khiến mọi thứ trở nên nhẹ nhàng hơn rất nhiều. Tuổi mới hãy luôn tự tin bước tiếp trên con đường bạn đã chọn nhé, vì bạn xứng đáng với tất cả những điều tốt đẹp nhất trên đời!",
-            signature: "From someone who cares with all my heart"
-        },
-
-        // Trang 6: Trang kết đặc biệt (Final Celebration & Confetti)
+        // Trang 6: Trang chúc mừng sinh nhật bùng nổ (Final Celebration)
         {
             type: "final",
-            pageNumber: 6,
             badge: "Happy Birthday",
             title: "HAPPY BIRTHDAY!",
-            recipientName: "Người đặc biệt 🎂",
-            wishText: "Chúc bạn có một tuổi mới thật nhiều niềm vui, nhiều may mắn và thật nhiều điều đẹp đẽ.",
+            recipientName: "{recipient} 🎂",
+            wishText: "Chúc em có một tuổi mới thật nhiều niềm vui, nhiều may mắn và thật nhiều điều đẹp đẽ.",
             closing: "With love,",
-            senderName: "Someone who cares",
-            replayText: "↻ Xem lại từ đầu"
+            senderName: "{sender}",
+            cakeIcon: "🎂",
+            cakeHint: "Nhấn vào bánh kem để bắn thêm pháo hoa!",
+            replayButtonText: "↻ Xem lại từ đầu"
         }
     ],
 
     // ----------------------------------------------------------------
-    // 6. ÂM NHẠC NỀN (BACKGROUND MUSIC)
+    // 7. TRANG LỜI CHÚC KẾT & BÌA SAU (CLOSING & BACK COVER)
     // ----------------------------------------------------------------
-    music: {
-        enabled: true,
-        // File nhạc MP3 đặt trong assets/audio/
-        // Nếu không có file nhạc hoặc file chưa tải được, hệ thống sẽ tự động chuyển
-        // sang giai điệu chúc mừng sinh nhật nhẹ nhàng bằng Web Audio API synthesizer.
-        src: "assets/audio/birthday.mp3",
-        autoplay: false // Trình duyệt chặn autoplay âm thanh trước khi tương tác
+    closing: {
+        tag: "Lời Chúc Cuối",
+        title: "Một Ngày Trọn Vẹn",
+        divider: "✨ 💖 ✨",
+        icon: "🎁",
+        quote: "“Cảm ơn vì đã luôn là chính em — một đóa hoa dịu dàng và rực rỡ nhất.”",
+        message: "Chúc em một tuổi mới bình an, tự tin và ngập tràn những phép màu tuyệt đẹp!",
+        replayButtonText: "↻ Xem lại từ đầu"
+    },
+
+    backCover: {
+        sealIcon: "💖",
+        title: "Happy Birthday",
+        subtitle: "Made with love for {recipient}",
+        date: "16/09/2003"
     },
 
     // ----------------------------------------------------------------
-    // 7. GIAO DIỆN & MÀU SẮC (THEME)
+    // 8. ĐIỀU HƯỚNG & NHÃN NÚT BẤM (NAVIGATION & BUTTONS)
+    // ----------------------------------------------------------------
+    navigation: {
+        prevButtonText: "Trước",
+        nextButtonText: "Tiếp",
+        coverLabel: "Bìa sách 📖",
+        backCoverLabel: "Bìa sau 💖",
+        pagePattern: "Trang {page} / {total}",
+        spreadPattern: "Trang {start} - {end} / {total}",
+        celebrationPattern: "Trang {total} / {total} • Kết thúc 🎂"
+    },
+
+    // ----------------------------------------------------------------
+    // 9. ÂM NHẠC NỀN (BACKGROUND MUSIC)
+    // ----------------------------------------------------------------
+    music: {
+        enabled: true,
+        // File nhạc MP3 đặt trong thư mục assets/audio/
+        // Nếu không tìm thấy file hoặc chưa tải được, hệ thống tự động phát
+        // giai điệu hộp nhạc (Music Box) "Happy Birthday" bằng Web Audio API.
+        src: "assets/audio/Happy Birthday (Piano Version).mp3",
+        autoplay: false
+    },
+
+    // ----------------------------------------------------------------
+    // 10. MÀU SẮC & GIAO DIỆN (THEME)
     // ----------------------------------------------------------------
     theme: {
         primaryColor: "#c86d51",
@@ -189,7 +253,10 @@ const birthdayConfig = {
     }
 };
 
-// Đảm bảo có thể truy cập được từ global scope
+// Đảm bảo có thể truy cập được từ global scope (window) hoặc module
 if (typeof window !== "undefined") {
     window.birthdayConfig = birthdayConfig;
+}
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = birthdayConfig;
 }
