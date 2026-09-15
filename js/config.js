@@ -58,7 +58,7 @@ const birthdayConfig = {
     lockScreen: {
         badge: "Chúc mừng sinh nhật em",
         title: "Gửi Ngọc Ánh",
-        subtitle: "Nhập mật khẩu để mở món quà sinh nhật đặc biệt này hé!",
+        subtitle: "Nhập mật khẩu để mở món quà sinh nhật đặc biệt này hé! Có nhạc ở góc phải trên đó!",
         inputPlaceholder: "Nhập mật khẩu bí mật...",
         buttonText: "Mở quà 🎁",
         // Thông báo khi nhập sai mật khẩu:
