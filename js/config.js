@@ -174,7 +174,7 @@ const birthdayConfig = {
                 },
                 {
                     image: "assets/images/photo-5.jpg",
-                    caption: "Sweet 🎂"
+                    caption: "Mong có cơ hội chụp lại ảnh này!"
                 }
             ],
             quote: "“Chúc em tuổi mới luôn là đóa hoa xinh đẹp và hạnh phúc nhất.”"
