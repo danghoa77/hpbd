@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="description" content="Interactive Birthday Book — Món quà sinh nhật đặc biệt dạng sách điện tử 3D lật trang.">
+    <meta name="description" content="Interactive Birthday Book — Món quà sinh nhật dành cho Ngọc Énh">
     <meta name="theme-color" content="#460f1b">
-    <title>Happy Birthday! 🎂 A Special Gift For You</title>
+    <title>Happy Birthday Ngọc Énh! </title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <!-- CSS Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
@@ -18,6 +21,7 @@
     <!-- canvas-confetti CDN for celebration effect -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
+
 <body>
     <!-- Background Canvas for Floating Particles & Glow -->
     <canvas id="particles-canvas" class="particles-bg" aria-hidden="true"></canvas>
@@ -65,17 +69,11 @@
                 <form id="lock-form" class="lock-form" novalidate>
                     <div class="input-group">
                         <span class="input-icon" aria-hidden="true">🔑</span>
-                        <input 
-                            type="password" 
-                            id="password-input" 
-                            class="password-input" 
-                            placeholder="Nhập mật khẩu bí mật..." 
-                            autocomplete="off"
-                            required
-                            aria-label="Mật khẩu mở thiệp"
-                            aria-describedby="lock-error-msg"
-                        >
-                        <button type="button" id="toggle-pw-visibility" class="toggle-pw-btn" aria-label="Hiện hoặc ẩn mật khẩu">
+                        <input type="password" id="password-input" class="password-input"
+                            placeholder="Nhập mật khẩu bí mật..." autocomplete="off" required
+                            aria-label="Mật khẩu mở thiệp" aria-describedby="lock-error-msg">
+                        <button type="button" id="toggle-pw-visibility" class="toggle-pw-btn"
+                            aria-label="Hiện hoặc ẩn mật khẩu">
                             👁️
                         </button>
                     </div>
@@ -103,7 +101,7 @@
         <!-- 2. BOOK PRESENTATION SCREEN (QUYỂN SÁCH SINH NHẬT 3D)     -->
         <!-- ========================================================= -->
         <section id="book-screen" class="book-screen hidden" aria-label="Quyển sách thiệp sinh nhật">
-            
+
             <div class="book-viewport" id="book-viewport">
                 <!-- 3D Book Container -->
                 <div class="book-perspective">
@@ -120,8 +118,10 @@
                 </div>
 
                 <!-- Page Edge Click Trigger Areas (for easy flipping) -->
-                <button type="button" class="edge-click-area edge-left" id="edge-prev-btn" aria-label="Lật trang trước"></button>
-                <button type="button" class="edge-click-area edge-right" id="edge-next-btn" aria-label="Lật trang sau"></button>
+                <button type="button" class="edge-click-area edge-left" id="edge-prev-btn"
+                    aria-label="Lật trang trước"></button>
+                <button type="button" class="edge-click-area edge-right" id="edge-next-btn"
+                    aria-label="Lật trang sau"></button>
             </div>
 
             <!-- BOOK BOTTOM CONTROLS & NAVIGATION -->
@@ -138,7 +138,8 @@
                     </div>
                 </div>
 
-                <button id="next-btn" class="nav-btn next-btn" aria-label="Trang tiếp theo" title="Trang tiếp theo (Phím →)">
+                <button id="next-btn" class="nav-btn next-btn" aria-label="Trang tiếp theo"
+                    title="Trang tiếp theo (Phím →)">
                     <span class="nav-label" id="next-btn-label">Tiếp</span>
                     <span class="nav-arrow" aria-hidden="true">›</span>
                 </button>
@@ -166,4 +167,5 @@
     <script src="js/config.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>
